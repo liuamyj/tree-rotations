@@ -12,7 +12,9 @@ var Triangulation = function() {
 	ctx.clearRect(0, 0, c.width, c.height);
 
 	const radius = 100;
-	const yOffset = 10;  
+	const xStart = 180; 
+	const yStart = 80;  
+	const labelScale = 1.1; 
 
 	/** 
 	* Computes the coordinates of the vertices of the (n+2)-gon. 
@@ -26,8 +28,10 @@ var Triangulation = function() {
 		var sides = labels.length;
 		var angle = ((Math.PI * 2)/sides);
 		for (var i = 0; i < sides; i++) {
-		vertices.set(labels[i], 
-					 [radius*Math.cos(angle*i), radius*Math.sin(angle*i)]);
+			// +/- 0.5*radius to center at origin
+			vertices.set(labels[i], 
+					 	 [radius*Math.cos(angle*i) - 0.5*radius, 
+					  	  radius*Math.sin(angle*i) + 0.5*radius]);
 		}
 		return vertices; 
 	};
@@ -40,11 +44,11 @@ var Triangulation = function() {
 	 */ 
   	this.labelVertices = function(vertices) {
 		ctx.beginPath();
-		ctx.translate(radius, radius + yOffset);
+		ctx.translate(xStart, yStart);
 		ctx.moveTo(radius, 0);
 		vertices.forEach(function (value, key, mapObj) {  
 			ctx.lineTo(value[0], value[1]);
-			ctx.fillText(key, value[0], value[1]);
+			ctx.fillText(key, (value[0]) * labelScale, value[1] * labelScale);
 		});
 		ctx.closePath();
 	};

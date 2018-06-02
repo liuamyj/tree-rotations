@@ -5,7 +5,8 @@
 var BSTDraw = function() {
   const radius = 15; // radius of node
   const yOffset = 45; // vertical space between levels of the tree
-  const xOffset = 25; // horizontal space between nodes
+  const xOffset = 150; // horizontal space between nodes
+  const labelOffset = 2; // offset to center text label within node
 
   // clear canvas
   var c = document.getElementById('bst-canvas');
@@ -24,7 +25,7 @@ var BSTDraw = function() {
     ctx.arc(x, y, radius, 0, 2*Math.PI); 
     ctx.stroke();
     ctx.closePath();
-    ctx.strokeText(value, x, y);
+    ctx.strokeText(value, x-labelOffset, y+labelOffset);
   }
 
   /** 
@@ -50,18 +51,20 @@ var BSTDraw = function() {
    * @param y      y-coordinate of starting node.
    * @param node   Node in the BST object currently being drawn. 
    */ 
-  this.drawLevel = function(x, y, node) {
+  this.drawLevel = function(x, y, node, level) {
     if (node === null) return; 
 
     this.drawNode(x, y, node.value);  
 
+    // scale horizontal space between nodes by 1/2^level to prevent overlapping
+    var xScaledOffset = xOffset * 1/Math.pow(2, level); 
     if (node.left !== null) {
-      this.drawLevel(x - xOffset, y + yOffset, node.left);
-      this.drawEdge(x, y, x - xOffset, y + yOffset); 
+      this.drawLevel(x - xScaledOffset, y + yOffset + radius, node.left, level + 1);
+      this.drawEdge(x, y + radius, x - xScaledOffset, y + yOffset); 
     }
     if (node.right !== null) {
-      this.drawLevel(x + xOffset, y + yOffset, node.right); 
-      this.drawEdge(x, y, x + xOffset, y + yOffset); 
+      this.drawLevel(x + xScaledOffset, y + yOffset + radius, node.right, level + 1); 
+      this.drawEdge(x, y + radius, x + xScaledOffset, y + yOffset); 
     }
   }
 };
@@ -76,5 +79,5 @@ var drawBST = function(bst, bstDraw) {
   // starting coordinates of root node
   const xStart = 150; 
   const yStart = 40; 
-  bstDraw.drawLevel(xStart, yStart, bst.root);
+  bstDraw.drawLevel(xStart, yStart, bst.root, 1);
 };
