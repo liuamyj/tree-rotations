@@ -8,10 +8,15 @@ var BSTDraw = function() {
   const xOffset = 150; // horizontal space between nodes
   const labelOffset = 2; // offset to center text label within node
 
-  // clear canvas
   var c = document.getElementById('bst-canvas');
   var ctx = c.getContext('2d');
-  ctx.clearRect(0, 0, c.width, c.height);
+
+  /** 
+   * Clears the canvas 
+   */
+  this.clearCanvas = function() {
+    ctx.clearRect(0, 0, c.width, c.height);
+  }
 
   /** 
    * Draws a node at the designated coordinates with specified label. 
@@ -79,5 +84,6 @@ var drawBST = function(bst, bstDraw) {
   // starting coordinates of root node
   const xStart = 150; 
   const yStart = 40; 
+  bstDraw.clearCanvas();
   bstDraw.drawLevel(xStart, yStart, bst.root, 1);
 };

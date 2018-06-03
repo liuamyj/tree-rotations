@@ -6,12 +6,19 @@
         <script src="bstDraw.js"></script>
         <script src="triangulation.js"></script>
         <script src="index.js"></script>
+        <link rel="stylesheet" type="text/css" href="index.css"></link>
     </head>
     <body>
         <div>
             Tree insertion order: 
-            <input type="text" id="treeInsertionOrder">
+            <input type="text" id="tree-insertion-order">
             <button type="button" onclick="draw()">Run</button>
+        </div>
+        <div id="rotate-node-controls" class="hidden">
+            Rotate at: 
+            <input type="text" id="rotate-node">
+            <button type="button" onclick="rotate(0)">Rotate Left</button>
+            <button type="button" onclick="rotate(1)">Rotate Right</button>
         </div>
         <div>
             <canvas id="bst-canvas" width="400" height="400">

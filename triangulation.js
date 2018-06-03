@@ -8,13 +8,19 @@ var Triangulation = function() {
 	// clear canvas
 	var c = document.getElementById('triangulation-canvas');
 	var ctx = c.getContext('2d');
-	ctx.setTransform(1, 0, 0, 1, 0, 0);
-	ctx.clearRect(0, 0, c.width, c.height);
 
-	const radius = 100;
+	const radius = 100; // radius of (n+2)-gon
 	const xStart = 180; 
 	const yStart = 80;  
 	const labelScale = 1.1; 
+
+	/** 
+	 * Clears the canvas 
+	 */
+	this.clearCanvas = function() {
+		ctx.setTransform(1, 0, 0, 1, 0, 0);
+		ctx.clearRect(0, 0, c.width, c.height);
+	}
 
 	/** 
 	* Computes the coordinates of the vertices of the (n+2)-gon. 
@@ -122,6 +128,7 @@ var drawTriangulation = function(bst, triangulation, input) {
 	valuesToAdd.push('-inf');
 
 	var vertices = triangulation.getVertices(valuesToAdd);
+	triangulation.clearCanvas();
 	triangulation.labelVertices(vertices);
 	triangulation.triangulate(bst, vertices); 
 };

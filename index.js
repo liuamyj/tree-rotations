@@ -1,3 +1,5 @@
+var myApp = {}; 
+
 /**
  * Onclick event handler for when user runs the tree visualization. 
  * - We grab the inputted tree insertion order (a spaced separated string) and
@@ -8,15 +10,28 @@
  *   a triangulated polygon on the HTML canvas triangulation-canvas. 
  */
 function draw() {
-	var bst = new BST(); 
-	var bstDraw = new BSTDraw();
-	var triangulation = new Triangulation(); 
+	myApp.bst = new BST(); 
+	myApp.bstDraw = new BSTDraw();
+	myApp.triangulation = new Triangulation(); 
 
-	var treeInsertionOrder = document.getElementById('treeInsertionOrder').value; 
+	myApp.treeInsertionOrder = document.getElementById('tree-insertion-order').value; 
 	
-    if (treeInsertionOrder) {
-    	addToBST(bst, treeInsertionOrder); 
-    	drawBST(bst, bstDraw);
-    	drawTriangulation(bst, triangulation, treeInsertionOrder);
+    if (myApp.treeInsertionOrder) {
+    	addToBST(myApp.bst, myApp.treeInsertionOrder); 
+    	drawBST(myApp.bst, myApp.bstDraw);
+    	drawTriangulation(myApp.bst, myApp.triangulation, myApp.treeInsertionOrder);
     }
+
+    // unhide controls to rotate a node left/right
+    var rotateNodeControls = document.getElementById('rotate-node-controls');
+    rotateNodeControls.classList.remove('hidden');
+};
+
+function rotate(direction) {
+	var node = document.getElementById('rotate-node').value;
+	myApp.bst.rotateNode(parseInt(node), direction); 
+
+	// redraw the tree visualizations after rotation
+	drawBST(myApp.bst, myApp.bstDraw);
+    drawTriangulation(myApp.bst, myApp.triangulation, myApp.treeInsertionOrder);
 };

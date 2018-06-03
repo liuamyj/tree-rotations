@@ -1,0 +1,11 @@
+.hidden {
+	display: none;
+}
+
+#rotate-node-controls {
+	margin-top: 5px;
+}
+
+#rotate-node {
+	width: 30px;
+}

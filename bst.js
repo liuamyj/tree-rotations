@@ -43,6 +43,56 @@ var BST = function() {
 			else this.insertInto(root.right, value); 
 		}
 	}
+
+	this.rotateUp = function(direction, currNode, parentNode, grandparentNode) {
+		if (direction === 0) { // rotate left
+			var currNodeLeft = currNode.left;
+			currNode.left = parentNode; 
+			parentNode.right = currNodeLeft;
+		} else { // rotate right
+			var currNodeRight = currNode.right;
+			currNode.right = parentNode; 
+			parentNode.left = currNodeRight;
+		}
+		// potentially update root
+		if (parentNode === this.root) {
+			this.root = currNode;
+		}
+		// potentially update grandparent node to point at new parent
+		else if (grandparentNode) {
+			if (parentNode.value < grandparentNode.value) {
+				grandparentNode.left = currNode; 
+			} else {
+				grandparentNode.right = currNode;
+			}
+		}
+	}
+
+	this.rotateNode = function(node, direction) {
+		// find node to rotate
+		var grandparentNode;
+		var parentNode; 
+		var currNode = this.root; 
+		while (true) {
+			if (currNode === null) return; // node not present in tree
+			else if (node === currNode.value) break; // found node
+			else {
+				grandparentNode = parentNode; 
+				parentNode = currNode;
+				currNode = (node < currNode.value) ? currNode.left : currNode.right;
+			}
+		}
+		// if rotation would move node downwards, instead rotate 
+		// right child for left rotation or left child for right rotation
+		if (currNode === this.root || 
+			(direction === 0 && currNode.value < parentNode.value) ||
+			(direction === 1 && currNode.value > parentNode.value)) {
+			grandparentNode = parentNode; 
+			parentNode = currNode; 
+			currNode = (direction === 0) ? currNode.right : currNode.left;
+		}
+		this.rotateUp(direction, currNode, parentNode, grandparentNode); 
+	}
 }
 
 /**
