@@ -44,6 +44,11 @@ var BST = function() {
 		}
 	}
 
+	/** 
+	 * Helper method for rotate which rotates currNode in the specified direction.
+	 * Rotation is always upwards (currNode ends up one level higher than it started)
+	 * direction is either 0 = rotate left or 1 = rotate right 
+	 */
 	this.rotateUp = function(direction, currNode, parentNode, grandparentNode) {
 		if (currNode === null) return;
 		if (direction === 0) { // rotate left
@@ -69,6 +74,10 @@ var BST = function() {
 		}
 	}
 
+	/** 
+	 * Rotates node in the specified direction.
+	 * direction is either 0 = rotate left or 1 = rotate right 
+	 */
 	this.rotateNode = function(node, direction) {
 		// find node to rotate
 		var grandparentNode;

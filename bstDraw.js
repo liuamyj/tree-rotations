@@ -82,7 +82,7 @@ var BSTDraw = function() {
  */
 var drawBST = function(bst, bstDraw) {
   // starting coordinates of root node
-  const xStart = 150; 
+  const xStart = 180; 
   const yStart = 40; 
   bstDraw.clearCanvas();
   bstDraw.drawLevel(xStart, yStart, bst.root, 1);

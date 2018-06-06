@@ -73,7 +73,7 @@ var Triangulation = function() {
 		 * 
 		 * @param c1, c2	Coordinates represented as [x-coordiante, y-coordinate]
 		 */ 
-		var drawLine = function(c1, c2) {
+		this.drawLine = function(c1, c2) {
 			ctx.beginPath();
 			ctx.moveTo(c1[0], c1[1]);
 			ctx.lineTo(c2[0], c2[1]); 
@@ -90,7 +90,7 @@ var Triangulation = function() {
 		 * @param leftParent  Value of node's left parent. 
 		 * @param rightParent Value of node's right parent. 
 		 */ 
-		var triangulateLevel = function(node, leftParent, rightParent) {
+		this.triangulateLevel = function(node, leftParent, rightParent) {
 			if (node == null) {
 				return;
 			}
@@ -99,17 +99,17 @@ var Triangulation = function() {
 			var leftParentCoords = vertices.get(leftParent); 
 
 			// draw lines from current node to its left and right parent
-			drawLine(valueCoords, leftParentCoords); 
-			drawLine(valueCoords, rightParentCoords);
+			this.drawLine(valueCoords, leftParentCoords); 
+			this.drawLine(valueCoords, rightParentCoords);
 
 			// node's left inherits node's leftParent and has node as a right parent
 			// node's right has node as a left parent and inherits node's rightParent
-			triangulateLevel(node.left, leftParent, node.value); 
-			triangulateLevel(node.right, node.value, rightParent); 
+			this.triangulateLevel(node.left, leftParent, node.value); 
+			this.triangulateLevel(node.right, node.value, rightParent); 
 		}
 
-		drawLine(vertices.get('-inf'), vertices.get('inf')); 
-		triangulateLevel(bst.root, '-inf', 'inf'); 
+		this.drawLine(vertices.get('-inf'), vertices.get('inf')); 
+		this.triangulateLevel(bst.root, '-inf', 'inf'); 
 	};
 };
 

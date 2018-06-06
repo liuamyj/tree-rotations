@@ -27,6 +27,13 @@ function draw() {
     rotateNodeControls.classList.remove('hidden');
 };
 
+/**
+ * Onclick event handler for rotating a node in the tree. 
+ * - We grab the inputted node to rotate and the direction (0 = rotate left, 
+ *	 1 = rotate right) and update the stored BST accordingly. 
+ * - Nothing will happen if trying to perform an illegal rotation 
+ *   (eg. rotating a node that does not exist).
+ */
 function rotate(direction) {
 	var node = document.getElementById('rotate-node').value;
 	myApp.bst.rotateNode(parseInt(node), direction); 
