@@ -123,9 +123,9 @@ var Triangulation = function() {
  */
 var drawTriangulation = function(bst, triangulation, input) {
 	// sort input in ascending order to label vertices
-	var valuesToAdd = input.split(' ').map(Number).sort((a, b) => a - b);
-	valuesToAdd.push('inf');
+	var valuesToAdd = input.trim().split(' ').map(Number).sort((a, b) => b - a);
 	valuesToAdd.push('-inf');
+	valuesToAdd.push('inf');
 
 	var vertices = triangulation.getVertices(valuesToAdd);
 	triangulation.clearCanvas();

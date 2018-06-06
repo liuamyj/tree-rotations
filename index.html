@@ -7,18 +7,27 @@
         <script src="triangulation.js"></script>
         <script src="index.js"></script>
         <link rel="stylesheet" type="text/css" href="index.css"></link>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700" rel="stylesheet">
     </head>
     <body>
-        <div>
-            Tree insertion order: 
-            <input type="text" id="tree-insertion-order">
-            <button type="button" onclick="draw()">Run</button>
-        </div>
-        <div id="rotate-node-controls" class="hidden">
-            Rotate at: 
-            <input type="text" id="rotate-node">
-            <button type="button" onclick="rotate(0)">Rotate Left</button>
-            <button type="button" onclick="rotate(1)">Rotate Right</button>
+        <div class="title">Binary Tree Triangulations</div>
+        <div class="controls">
+            <div class="intro-text">This tool visualizes binary trees as polygon triangulations as described in the paper <a href="https://www.cs.cmu.edu/~sleator/papers/rotation-distance.pdf">Rotation Distance, Triangulations, and Hyperbolic Geometry</a> by Sleator, Tarjan, and Thurston.
+
+            <br><br>
+                
+            <b>To use:</b> input a series of nodes in the order they should be inserted, separated by spaces. For example, to see a complete binary tree, try "4 2 6 1 3 5 7".</div>
+            <div>
+                <b>Tree insertion order:</b> 
+                <input type="text" id="tree-insertion-order">
+                <button type="button" onclick="draw()">Run</button>
+            </div>
+            <div id="rotate-node-controls" class="hidden">
+                <b>Rotate at:</b> 
+                <input type="text" id="rotate-node">
+                <button type="button" onclick="rotate(0)">Rotate Left</button>
+                <button type="button" onclick="rotate(1)">Rotate Right</button>
+            </div>
         </div>
         <div>
             <canvas id="bst-canvas" width="400" height="400">

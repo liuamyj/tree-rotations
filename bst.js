@@ -45,6 +45,7 @@ var BST = function() {
 	}
 
 	this.rotateUp = function(direction, currNode, parentNode, grandparentNode) {
+		if (currNode === null) return;
 		if (direction === 0) { // rotate left
 			var currNodeLeft = currNode.left;
 			currNode.left = parentNode; 
@@ -103,7 +104,7 @@ var BST = function() {
  * 				the order they should be inserted.   
  */
 var addToBST = function(bst, input) {
-	var valuesToAdd = input.split(' ');
+	var valuesToAdd = input.trim().split(' ');
 	valuesToAdd.forEach(function(element) {
 		bst.insert(parseInt(element));
   	});
